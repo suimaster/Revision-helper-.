@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Revision Helper App</title>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f7;
+    text-align:center;
+    padding:20px;
+}
+h1{
+    color:#2c3e50;
+}
+textarea{
+    width:90%;
+    height:100px;
+    padding:10px;
+    font-size:16px;
+}
+select, button{
+    padding:10px;
+    font-size:16px;
+    margin:10px;
+}
+#output{
+    background:white;
+    padding:15px;
+    margin-top:20px;
+    border-radius:6px;
+    min-height:80px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>📘 REVISION HELPER</h1>
+
+<textarea id="topic" placeholder="Paste lesson or key paragraph here"></textarea>
+
+<br>
+
+<select id="mode">
+    <option value="">Choose Revision Mode</option>
+    <option value="simple">Explain Simply</option>
+    <option value="points">Key Points</option>
+    <option value="question">Quick Question</option>
+    <option value="recap">One-Line Recap</option>
+</select>
+
+<br>
+
+<button onclick="revise()">Start Revision</button>
+
+<div id="output">Revision output will appear here</div>
+
+<script>
+function revise(){
+    let text = document.getElementById("topic").value;
+    let mode = document.getElementById("mode").value;
+    let result = "";
+
+    if(text.trim() === ""){
+        alert("Please enter lesson content!");
+        return;
+    }
+
+    if(mode === "simple"){
+        result = "Simple Explanation:\n" + text;
+    }
+    else if(mode === "points"){
+        result = "Key Points:\n• " + text.replace(/\. /g, ".\n• ");
+    }
+    else if(mode === "question"){
+        result = "Teacher Question:\nWhy is this topic important?\n\nHint:\n" + text;
+    }
+    else if(mode === "recap"){
+        result = "One-Line Recap:\n" + text.split('. ')[0] + ".";
+    }
+    else{
+        alert("Please select a revision mode!");
+        return;
+    }
+
+    document.getElementById("output").innerText = result;
+}
+</script>
+
+</body>
+</html>
